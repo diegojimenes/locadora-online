@@ -1,0 +1,8 @@
+{
+  "name": "teste4all",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/diegojimenes/locadora-online.git",
+  "author": "diego jimenes <contato.diegojimenes@gmail.com>",
+  "license": "MIT"
+}
