@@ -10,7 +10,18 @@ module.exports = {
       },
       name: Sequelize.STRING,
       email: Sequelize.STRING,
-      password: Sequelize.STRING
+      password: Sequelize.STRING,
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        field: 'createdAt',
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        onUpdate: Sequelize.NOW,
+        field: 'updatedAt',
+      }
     });
   },
 

@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { Sequelize } from 'sequelize'
 
 export class connection {
-    private sequelize
+    public sequelize
     constructor() {
         this.sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PASS, {
             host: process.env.HOST,
