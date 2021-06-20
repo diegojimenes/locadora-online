@@ -1,0 +1,9 @@
+{
+    "watch": [
+      "src",
+      "./app.ts"
+    ],
+    "ext": ".ts",
+    "ignore": [],
+    "exec": "ts-node ./app.ts"
+  }

@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    container_name: dev_postgres
+    network_mode: bridge
+    environment:
+        POSTGRES_DB: dev
+        POSTGRES_PASSWORD: dev123
+    restart: always
+    ports:
+        - "5432:5432"
+    volumes:
+        - /postgre_data:/var/lib/postgresql/data 
