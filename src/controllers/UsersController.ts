@@ -9,6 +9,29 @@ export class UserController {
         this.model = users(connection)
     }
 
+    login = async (req, res) => {
+        try {
+            const { email, password } = req.body
+            const usr = await this.model.findOne({
+                where: {
+                    email
+                }
+            })
+            const match = await bcrypt.compare(password, usr.password)
+            if (match) {
+                const token = jwt.sign({ id: usr.id, exp: Math.floor(Date.now() / 1000) + (60 * 600) }, process.env.JWTSECRETE)
+                return res.status(200).json({
+                    user: usr,
+                    token
+                })
+            } else {
+                throw 'invalid password'
+            }
+        } catch (err) {
+            return res.status(500).json(err)
+        }
+    }
+
     get = async (req, res) => {
         try {
             const { id } = req.body
@@ -33,13 +56,11 @@ export class UserController {
             const id = uuid()
             const { name, email, password } = req.body
             const token = jwt.sign({ id, exp: Math.floor(Date.now() / 1000) + (60 * 600) }, process.env.JWTSECRETE)
-            bcrypt.hash(password, 10, async (err, hash) => {
-                if(err) throw err
-                const usr = await this.model.create({ id, name, email, password: hash })
-                return res.status(200).json({
-                    user: usr,
-                    token
-                })
+            const hash = await bcrypt.hash(password, 10)
+            const usr = await this.model.create({ id, name, email, password: hash })
+            return res.status(200).json({
+                user: usr,
+                token
             })
         } catch (err) {
             return res.status(500).json(err)

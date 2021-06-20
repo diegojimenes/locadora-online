@@ -10,4 +10,5 @@ router.get('/listUsers', userController.index)
 router.put('/updateUser', userController.update)
 router.post('/deleteUser', userController.delete)
 router.get('/getUser', userController.get)
+router.get('/login', userController.login)
 export default router
