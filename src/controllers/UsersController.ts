@@ -1,6 +1,8 @@
 import users from "../models/users"
 import { v4 as uuid } from 'uuid'
-
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import 'dotenv/config'
 export class UserController {
     private model
     constructor(connection) {
@@ -30,8 +32,15 @@ export class UserController {
         try {
             const id = uuid()
             const { name, email, password } = req.body
-            const usr = await this.model.create({ id, name, email, password })
-            return res.status(200).json(usr)
+            const token = jwt.sign({ id, exp: Math.floor(Date.now() / 1000) + (60 * 600) }, process.env.JWTSECRETE)
+            bcrypt.hash(password, 10, async (err, hash) => {
+                if(err) throw err
+                const usr = await this.model.create({ id, name, email, password: hash })
+                return res.status(200).json({
+                    user: usr,
+                    token
+                })
+            })
         } catch (err) {
             return res.status(500).json(err)
         }
