@@ -1,16 +1,6 @@
 const path = require('path')
 
 module.exports = {
-    // config: {
-    //     database: process.env.DB,
-    //     username: process.env.USER,
-    //     password: process.env.PASS,
-    //     host: process.env.HOST,
-    //     dialect: 'postgres',
-    //     define: {
-    //         timestamps: true
-    //     }
-    // },
     config: path.resolve(__dirname, 'src', 'db', 'config.js'),
     'migrations-path': path.resolve(__dirname, 'src', 'db', 'migrations')
 }

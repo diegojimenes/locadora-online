@@ -12,7 +12,18 @@ module.exports = {
       director: Sequelize.STRING,
       price: Sequelize.INTEGER,
       inStock: Sequelize.INTEGER,
-      rented: Sequelize.INTEGER
+      rented: Sequelize.INTEGER,
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        field: 'createdAt',
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        onUpdate: Sequelize.NOW,
+        field: 'updatedAt',
+      }
     });
   },
 
