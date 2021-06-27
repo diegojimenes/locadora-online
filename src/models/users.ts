@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize"
 const users = (sequelize) => {
     return sequelize.define('users', {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             primaryKey: true,
         },
         name: DataTypes.STRING,
